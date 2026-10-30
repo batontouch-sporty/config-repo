@@ -1,0 +1,37 @@
+name: CI
+
+# 설정 저장소 검사. YAML 문법과 평문 비밀값을 PR 단계에서 막는다.
+# 비밀값은 Config Server 암호화 {cipher} 형식만 허용한다.
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  check:
+    name: YAML · 비밀값 검사
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: YAML 문법
+        run: |
+          pip install --quiet yamllint
+          yamllint -d "{extends: relaxed, rules: {line-length: disable}}" .
+
+      - name: 평문 비밀값 검사
+        # password·secret·key 계열 키에 {cipher}로 시작하지 않는 값이 있으면 실패한다.
+        run: |
+          pattern='^[[:space:]]*[A-Za-z0-9_.-]*(password|passwd|secret|secret-key|api-key|private-key|token)[[:space:]]*:[[:space:]]*["'"'"']?[^"'"'"'{[:space:]]'
+          if grep -rniE --include='*.yml' --include='*.yaml' --include='*.properties' "$pattern" . | grep -viE '\{cipher\}|\$\{[A-Z_]+\}|:[[:space:]]*$' ; then
+            echo "::error::평문 비밀값이 있습니다. {cipher}로 암호화하거나 환경변수(\${NAME})로 바꿔 주세요."
+            exit 1
+          fi
+          echo "평문 비밀값 없음"
