@@ -1,0 +1,20 @@
+# yaml-language-server: $schema=https://coderabbit.ai/integrations/schema.v2.json
+# PR 자동 리뷰 설정. 리뷰는 참고 의견이고 머지 조건은 CI 통과다.
+language: ko-KR
+
+reviews:
+  profile: chill
+  request_changes_workflow: false
+  high_level_summary: true
+  poem: false
+  auto_review:
+    enabled: true
+    drafts: false
+  path_instructions:
+    - path: "**/*.yml"
+      instructions: >-
+        비밀번호·키·토큰이 평문이 아닌지({cipher} 또는 환경변수인지), 파일 이름이 <서비스명>-<프로필>.yml 규칙을 따르는지,
+        포트가 서비스 보드(user 8081, match 8082, facility 8083, ai 8084, notification 8085)와 맞는지 확인한다.
+
+chat:
+  auto_reply: true
