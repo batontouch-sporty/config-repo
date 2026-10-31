@@ -1,0 +1,16 @@
+eureka:
+  instance:
+    instance-id: ${spring.application.name}:${spring.cloud.client.ip-address}:${server.port}
+    prefer-ip-address: true
+  client:
+    service-url:
+      # Docker·K8s는 EUREKA_URL로 주소를 넘긴다. 프로필 파일은 두지 않는다.
+      defaultZone: ${EUREKA_URL:http://localhost:8761/eureka}
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include:
+          - health
+          - info
