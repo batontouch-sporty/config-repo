@@ -10,6 +10,11 @@ spring:
   data:
     redis:
       timeout: 6000ms
+  kafka:
+    producer:
+      # 브로커가 없을 때 Outbox 발행이 DB 잠금을 오래 잡지 않게 대기 시간을 줄인다.
+      properties:
+        max.block.ms: 3000
 
 jwt:
   secret: ${JWT_SECRET_KEY}

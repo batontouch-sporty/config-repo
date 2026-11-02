@@ -28,7 +28,7 @@ match:
     enabled: ${MATCH_STARTING_SOON_ENABLED:true}
     delay-ms: ${MATCH_STARTING_SOON_DELAY_MS:60000}
     initial-delay-ms: ${MATCH_STARTING_SOON_INITIAL_DELAY_MS:60000}
-  # 탈퇴 Saga 처리. dev(Compose)에서는 켠다(match-service-dev.yml).
+  # 탈퇴 Saga 처리. dev·prod에서는 켠다(match-service-dev.yml, match-service-prod.yml).
   withdrawal:
     enabled: ${MATCH_WITHDRAWAL_ENABLED:false}
   clients:

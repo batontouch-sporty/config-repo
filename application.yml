@@ -11,10 +11,6 @@ spring:
         dialect: org.hibernate.dialect.MariaDBDialect
   # Spring Boot 기본 Kafka 설정을 쓰는 서비스(user·notification)에 적용된다. match는 코드에서 직접 만든다.
   kafka:
-    producer:
-      # 브로커가 없을 때 Outbox 발행이 DB 잠금을 오래 잡지 않게 대기 시간을 줄인다.
-      properties:
-        max.block.ms: 3000
     consumer:
       auto-offset-reset: earliest
 
