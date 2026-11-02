@@ -1,0 +1,54 @@
+spring:
+  cloud:
+    openfeign:
+      circuitbreaker:
+        enabled: true
+      client:
+        config:
+          matchMemberClient:
+            connectTimeout: ${MATCH_USER_CONNECT_TIMEOUT_MS:1000}
+            readTimeout: ${MATCH_USER_READ_TIMEOUT_MS:2000}
+          matchFacilityClient:
+            connectTimeout: ${MATCH_FACILITY_CONNECT_TIMEOUT_MS:1000}
+            readTimeout: ${MATCH_FACILITY_READ_TIMEOUT_MS:2000}
+  datasource:
+    username: ${MATCH_DB_USERNAME:match_app}
+    password: ${MATCH_APP_PASSWORD}
+  jpa:
+    hibernate:
+      ddl-auto: ${MATCH_DB_DDL_AUTO:validate}
+
+management:
+  health:
+    db:
+      enabled: ${MATCH_DB_HEALTH_ENABLED:true}
+
+match:
+  starting-soon:
+    enabled: ${MATCH_STARTING_SOON_ENABLED:true}
+    delay-ms: ${MATCH_STARTING_SOON_DELAY_MS:60000}
+    initial-delay-ms: ${MATCH_STARTING_SOON_INITIAL_DELAY_MS:60000}
+  # 탈퇴 Saga 처리. dev·prod에서는 켠다(match-service-dev.yml, match-service-prod.yml).
+  withdrawal:
+    enabled: ${MATCH_WITHDRAWAL_ENABLED:false}
+  clients:
+    user:
+      url: ${MATCH_USER_SERVICE_URL:}
+    facility:
+      url: ${MATCH_FACILITY_SERVICE_URL:}
+
+resilience4j:
+  circuitbreaker:
+    configs:
+      default:
+        slidingWindowSize: 10
+        minimumNumberOfCalls: 5
+        failureRateThreshold: 50
+        waitDurationInOpenState: 10s
+        permittedNumberOfCallsInHalfOpenState: 2
+        ignoreExceptions:
+          - feign.FeignException$NotFound
+  timelimiter:
+    configs:
+      default:
+        timeoutDuration: 3s

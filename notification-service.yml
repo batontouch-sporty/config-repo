@@ -1,0 +1,12 @@
+spring:
+  datasource:
+    driver-class-name: org.mariadb.jdbc.Driver
+    username: ${NOTIFICATION_DB_USERNAME:notification_app}
+    password: ${NOTIFICATION_APP_PASSWORD}
+  jpa:
+    hibernate:
+      ddl-auto: ${NOTIFICATION_DB_DDL_AUTO:validate}
+    open-in-view: false
+  kafka:
+    consumer:
+      group-id: notification-service

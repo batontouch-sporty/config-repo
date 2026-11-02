@@ -1,0 +1,10 @@
+# Compose. 같은 네트워크의 서비스명과 내부 포트로 붙는다.
+eureka:
+  client:
+    service-url:
+      defaultZone: ${EUREKA_URL:http://discovery-service:8761/eureka}
+
+management:
+  zipkin:
+    tracing:
+      endpoint: http://zipkin:9411/api/v2/spans
