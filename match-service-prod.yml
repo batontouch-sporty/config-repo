@@ -5,6 +5,11 @@ spring:
   kafka:
     bootstrap-servers: ${KAFKA_BOOTSTRAP_SERVERS}
 
+match:
+  # 탈퇴 Saga는 dev와 같이 켠다.
+  withdrawal:
+    enabled: ${MATCH_WITHDRAWAL_ENABLED:true}
+
 eureka:
   client:
     service-url:
