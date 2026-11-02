@@ -1,0 +1,10 @@
+# IDE 실행. 인프라는 Compose가 127.0.0.1에 연 포트로 붙는다(.env의 *_HOST_PORT).
+eureka:
+  client:
+    service-url:
+      defaultZone: ${EUREKA_URL:http://localhost:8761/eureka}
+
+management:
+  zipkin:
+    tracing:
+      endpoint: http://localhost:${ZIPKIN_HOST_PORT:9411}/api/v2/spans

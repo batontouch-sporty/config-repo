@@ -1,0 +1,21 @@
+# Compose. 같은 네트워크의 서비스명과 내부 포트로 붙는다.
+spring:
+  datasource:
+    url: jdbc:mariadb://mariadb:3306/match_db
+  kafka:
+    bootstrap-servers: kafka:29092
+
+# Compose에서는 탈퇴 Saga 처리를 켠다.
+match:
+  withdrawal:
+    enabled: ${MATCH_WITHDRAWAL_ENABLED:true}
+
+eureka:
+  client:
+    service-url:
+      defaultZone: ${EUREKA_URL:http://discovery-service:8761/eureka}
+
+management:
+  zipkin:
+    tracing:
+      endpoint: http://zipkin:9411/api/v2/spans

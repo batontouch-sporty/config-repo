@@ -1,0 +1,23 @@
+# K8s. 클러스터 안 서비스는 K8s DNS 이름, infra EC2(DB·Kafka·Redis·모니터링)는 환경변수로 받는다.
+spring:
+  cloud:
+    gateway:
+      server:
+        webflux:
+          globalcors:
+            cors-configurations:
+              '[/**]':
+                allowed-origins: ${CORS_ALLOWED_ORIGIN}
+
+prometheus:
+  url: ${PROMETHEUS_URL}
+
+eureka:
+  client:
+    service-url:
+      defaultZone: ${EUREKA_URL:http://discovery-service:8761/eureka}
+
+management:
+  zipkin:
+    tracing:
+      endpoint: http://zipkin:9411/api/v2/spans

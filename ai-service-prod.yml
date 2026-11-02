@@ -1,0 +1,10 @@
+# K8s. 클러스터 안 Eureka·Zipkin을 K8s DNS 이름으로 찾는다.
+eureka:
+  client:
+    service-url:
+      defaultZone: ${EUREKA_URL:http://discovery-service:8761/eureka}
+
+management:
+  zipkin:
+    tracing:
+      endpoint: http://zipkin:9411/api/v2/spans
