@@ -1,5 +1,8 @@
 # K8s. 클러스터 안 서비스는 K8s DNS 이름, infra EC2(DB·Kafka·Redis·모니터링)는 환경변수로 받는다.
 spring:
+  rabbitmq:
+    host: ${RABBITMQ_HOST}
+    port: ${RABBITMQ_PORT:5672}
   datasource:
     url: jdbc:mariadb://${MARIADB_HOST}:${MARIADB_HOST_PORT:3306}/facility_db
 

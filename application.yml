@@ -13,6 +13,10 @@ spring:
   kafka:
     consumer:
       auto-offset-reset: earliest
+  # Spring Cloud Bus 계정. 주소(host·port)는 <서비스명>-<프로필>.yml에 있다.
+  rabbitmq:
+    username: ${RABBITMQ_USER}
+    password: ${RABBITMQ_PASSWORD}
 
 management:
   endpoints:
@@ -22,6 +26,11 @@ management:
           - health
           - info
           - prometheus
+          # Bus 새로고침 확인용. 조회만 열고 로그 레벨 변경(POST)은 막는다. Gateway는 health 밖의 actuator를 막는다.
+          - loggers
+  endpoint:
+    loggers:
+      access: read-only
   metrics:
     tags:
       application: ${spring.application.name}
@@ -36,3 +45,8 @@ management:
   observations:
     enable:
       tasks: false
+
+# Bus 새로고침 시연 값. 이 값을 바꾸고 config-service의 /actuator/busrefresh를 부르면 재시작 없이 반영된다.
+logging:
+  level:
+    com.example.sporty: INFO

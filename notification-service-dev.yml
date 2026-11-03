@@ -1,5 +1,8 @@
 # Compose. 같은 네트워크의 서비스명과 내부 포트로 붙는다.
 spring:
+  rabbitmq:
+    host: rabbitmq
+    port: 5672
   datasource:
     url: jdbc:mariadb://mariadb:3306/notification_db
   kafka:

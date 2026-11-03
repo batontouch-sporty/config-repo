@@ -1,5 +1,8 @@
 # IDE 실행. 인프라는 Compose가 127.0.0.1에 연 포트로 붙는다(.env의 *_HOST_PORT).
 spring:
+  rabbitmq:
+    host: localhost
+    port: ${RABBITMQ_HOST_PORT:5672}
   cloud:
     gateway:
       server:
