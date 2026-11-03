@@ -1,4 +1,9 @@
-# K8s. 클러스터 안 Eureka·Zipkin을 K8s DNS 이름으로 찾는다.
+# K8s. 클러스터 안 Eureka·Zipkin은 K8s DNS 이름, infra EC2의 RabbitMQ는 환경변수로 받는다.
+spring:
+  rabbitmq:
+    host: ${RABBITMQ_HOST}
+    port: ${RABBITMQ_PORT:5672}
+
 eureka:
   client:
     service-url:
