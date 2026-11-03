@@ -16,7 +16,7 @@ spring:
   # Spring Cloud Bus 계정. 주소(host·port)는 <서비스명>-<프로필>.yml에 있다.
   rabbitmq:
     username: ${RABBITMQ_USER:guest}
-    password: ${RABBITMQ_PASSWORD:guest}
+    password: ${RABBITMQ_PASSWORD}
 
 management:
   endpoints:
