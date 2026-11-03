@@ -15,6 +15,15 @@ spring:
       # 브로커가 없을 때 Outbox 발행이 DB 잠금을 오래 잡지 않게 대기 시간을 줄인다.
       properties:
         max.block.ms: 3000
+  # 탈퇴 Saga 시간 초과 때 match 결과 조회(GET /internal/withdrawals/{sagaId}).
+  # match가 회원 잠금을 최대 3초 기다리므로 읽기 타임아웃은 그보다 길게 둔다.
+  cloud:
+    openfeign:
+      client:
+        config:
+          userMatchWithdrawalClient:
+            connectTimeout: ${USER_MATCH_CONNECT_TIMEOUT_MS:1000}
+            readTimeout: ${USER_MATCH_READ_TIMEOUT_MS:5000}
 
 jwt:
   secret: ${JWT_SECRET_KEY}
@@ -32,3 +41,9 @@ admin:
     email: ${ADMIN_EMAIL:}
     password: ${ADMIN_PASSWORD:}
     nickname: ${ADMIN_NICKNAME:}
+
+# match-service 주소. 비우면 Eureka로 찾는다.
+user:
+  clients:
+    match:
+      url: ${USER_MATCH_SERVICE_URL:}
