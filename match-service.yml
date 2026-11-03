@@ -31,6 +31,16 @@ match:
   # 탈퇴 Saga 처리. dev·prod에서는 켠다(match-service-dev.yml, match-service-prod.yml).
   withdrawal:
     enabled: ${MATCH_WITHDRAWAL_ENABLED:false}
+  # 포인트 보증금 Saga(backend 이슈 #125). 생성·참가·승급 확정 전에 보증금 10점을 차감한다.
+  deposit:
+    enabled: ${MATCH_DEPOSIT_ENABLED:true}
+    timeout: ${MATCH_DEPOSIT_TIMEOUT:5m}
+    maintenance-delay-ms: ${MATCH_DEPOSIT_MAINTENANCE_DELAY_MS:10000}
+  # 시작·종료 시각에 맞춘 상태 전이(IN_PROGRESS·COMPLETED)와 종료 시 출석 정산 요청 발행.
+  lifecycle:
+    enabled: ${MATCH_LIFECYCLE_ENABLED:true}
+    delay-ms: ${MATCH_LIFECYCLE_DELAY_MS:60000}
+    initial-delay-ms: ${MATCH_LIFECYCLE_INITIAL_DELAY_MS:60000}
   clients:
     user:
       url: ${MATCH_USER_SERVICE_URL:}
