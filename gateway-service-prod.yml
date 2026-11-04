@@ -24,3 +24,7 @@ management:
   zipkin:
     tracing:
       endpoint: http://zipkin:9411/api/v2/spans
+
+# Config Server가 키스토어로 복호화해 내려 준다(K8s Secret config-encrypt-keystore).
+jwt:
+  secret: '{cipher}AQAHcUiZTf7ISyZdbaekZ4xLXZ20uiFNtyBWzOKLj3WDFakyU29HCGizHT33UY29++iyG+z3psjsfTRE0a4UOMV7z3RO+xLZ/IJ+/dIJGwdNJ1hBo+zxm/IjBtgNay6FryFD8k6Id4+uRrJmd3uI0cACtdMLQKykhdhR6twC9jHJ/cIV7pXWtxyQpBWScr+lDZwo3A1sW6UKm0uXuo9Zr9UwgN6VYgBBcuR2SKURHhpoFkp7r/Q+pt1zY9kGE2mXL1UH6S2L8HhezjZyAHyuswdvjeT/gK6b3G/MaMq9LHkU9af/QPRaMpW4JrSQQySX3z5a23Vww7fQZ6zSfhyHLLpcdvDgEFIloDySXgSjkZCaZMG625rnn83HYv/b54gNQZApOjmheVe+9X0Z5C53lkWQqV4wgRa1oAbthd9kAAAq03WO1Yfe+JqZgmZrStvQYXPaRY3K/pXPrM1IZzN+kiWj'
