@@ -5,6 +5,8 @@ spring:
     port: ${RABBITMQ_PORT:5672}
   datasource:
     url: jdbc:mariadb://${MARIADB_HOST}:${MARIADB_HOST_PORT:3306}/match_db
+    # Config Server가 키스토어로 복호화해 내려 준다(K8s Secret config-encrypt-keystore). 공통 설정의 ${MATCH_APP_PASSWORD}를 prod에서만 덮어쓴다.
+    password: '{cipher}AQAAJYrnMiFW6DRAxLDd4rlxXg9amEAYbH85PXj1H/+iNlfKJM8sTCK+PIskqfRH4PsgDRS1kRpuRCQpSHr2bOLQekjzkPeS6JBTrqIZGGlfc/a5MJ7YX6Ex7IMx6E037dRRRMW2m/W0+BtyEB6Y6BnNDk8x55KWs0Hxco74EJDU6DoDDgmanh662juFfzHI2ws42J3m9bWSExSpWN0/7LuoGYuKlX/jjy4j5MIkLoSY7DF+kftHLgjEzuus9+CQlI0CjZ5DkN421wxx3yQdQ3q1O644RxpJDkE7O1izBywlpZA/IRiVbnX95yR03LXTYFCCTueKyeZx7d3Dzs7oR/cSshlIyly8wlOwBElnfCkxoe/kd5dFEocxHsZoHaZiYBMRxQcxFDI0A5QeehC+IGzn50v+N3IHa9jTkFgaDcQFFNXE6Oj73upFsLVToUg5srxhqEGVs7ez9UDKHvestXxS'
   kafka:
     bootstrap-servers: ${KAFKA_BOOTSTRAP_SERVERS}
 
