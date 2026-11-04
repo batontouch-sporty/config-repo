@@ -3,6 +3,10 @@ spring:
   rabbitmq:
     host: ${RABBITMQ_HOST}
     port: ${RABBITMQ_PORT:5672}
+  ai:
+    openai:
+      # Config Server가 키스토어로 복호화해 내려 준다(K8s Secret config-encrypt-keystore).
+      api-key: '{cipher}AQBsoTOM/L0ViGWpMGkOZ+gX98dYl+V0Rx2U8mh+HyM1zmsGEifHVjmJhk+rnsuuBxg2B6vda23nVmvvStJqThpgB43KL+2j2nu59b9EKELsLFETeAT4GWTVL3d2Gu/GWd2ZSxqtN9iPO19W2nXD8KwhBcJF9Zj29psxBhibQNNgbDp6wSoVtaT9WIKZviwX2vr4S39jTYT/GWSM8DWO2vh1F/rNA1RermwNRa4XptLJKkuMfzW+Nrc/DMd6v0T5GJyeuQWmxADitW0CmaE7af+DlGvmXlQzpb6HVuUKA3VKo5Xs+45x3noFK+bZd6cIFB0EcB8SiaaoGlz+tXJ0UhrqIOuiYPK1OwNPM6sxynbn79d1cwrAVP/XaiUn0fM7nsPJtfcFCq9j3+lyM7+iO9KLiFrlioyPQgpAfob76/vezKo4vx2FY9EdNq1uuqJablzkJRwgtl+8GoRsJzVerwT9V451wvlO/LBAucm71D6tOKuAUwD/OKUTQpnvoepXSkOsm6cMbHfQRkUBU5USdhvknqsdniju/N4kvfnmXi9OGY71Tqdp/9kGwSGlmZiMgdtU9tvm4ItXHjSZWOHZuINS'
 
 eureka:
   client:
